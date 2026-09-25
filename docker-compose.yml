@@ -1,0 +1,22 @@
+services:
+  sport-dashboard:
+    build: .
+    container_name: sport-dashboard
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Moscow
+      DB_HOST: postgres_db
+      DB_PORT: 5432
+      DB_NAME: postgres_db
+      DB_USER: postgres_user
+      DB_PASSWORD: ${DB_PASSWORD}
+      NEXT_PUBLIC_SITE_URL: http://84.54.57.64:787
+    ports:
+      - "787:3000"
+    networks:
+      - sport-db
+
+networks:
+  sport-db:
+    external: true
+    name: postgres_default
